@@ -1,3 +1,4 @@
+from telebot.apihelper import ApiException
 import telebot
 from telebot import types
 import weath_pars
@@ -8,7 +9,7 @@ import pathlib
 import calc
 import logger as lg
 
-API_TOKEN = '5939391958:AAEMQ_sixKH5YXCpObriGvGD80Ie4EFZP3c'
+API_TOKEN = ''
 bot = telebot.TeleBot(API_TOKEN)
 
 
@@ -44,7 +45,7 @@ def get_mes(msg):
             for i in txt:
                 bot.send_message(msg.chat.id, i)
             bot.send_message(msg.chat.id, 'Для выхода в меню нажмите любую букву')
-        except Exception:
+        except ApiException:
             pass
     elif msg.text == "2":
         lg.actions('Добавить новую запись')
