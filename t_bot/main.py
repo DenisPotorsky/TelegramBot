@@ -8,7 +8,7 @@ import pathlib
 import calc
 import logger as lg
 
-API_TOKEN = '5939391958:AAEMQ_sixKH5YXCpObriGvGD80Ie4EFZP3c'
+API_TOKEN = ''
 bot = telebot.TeleBot(API_TOKEN)
 
 
