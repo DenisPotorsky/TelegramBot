@@ -8,7 +8,7 @@ import pathlib
 import calc
 import logger as lg
 
-API_TOKEN = ''
+API_TOKEN = '5939391958:AAEMQ_sixKH5YXCpObriGvGD80Ie4EFZP3c'
 bot = telebot.TeleBot(API_TOKEN)
 
 
@@ -38,26 +38,29 @@ def get_mes(msg):
         menu = "1. Посмотреть записи \n 2. Добавить новую запись \n 3. Импорт данных\n 4. Экспорт данных"
         bot.send_message(msg.chat.id, menu)
     elif msg.text == "1":
-        lg.actions('Посмотреть записи')
-        txt = adding_an_entry.show_data()
-        for i in txt:
-            bot.send_message(msg.chat.id, i)
-        bot.send_message(msg.chat.id, 'Для выхода в меню нажмите любую букву')
+        try:
+            lg.actions('Посмотреть записи')
+            txt = adding_an_entry.show_data()
+            for i in txt:
+                bot.send_message(msg.chat.id, i)
+            bot.send_message(msg.chat.id, 'Для выхода в меню нажмите любую букву')
+        except Exception:
+            pass
     elif msg.text == "2":
         lg.actions('Добавить новую запись')
         message = bot.send_message(msg.chat.id, 'Напишите фамилию, имя, телефон, почту и комментарий в одну строку')
         bot.register_next_step_handler(message, start_2)
         lg.actions(message.text)
-    elif msg.text == "3":
-        lg.actions('Импорт данных')
+    elif msg.text == "4":
+        lg.actions('Экспорт данных')
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
         f1 = types.KeyboardButton(".txt")
         f2 = types.KeyboardButton(".scv")
         markup.add(f1, f2)
         mess = bot.send_message(msg.chat.id, 'Выберите формат для импорта', reply_markup=markup)
         bot.register_next_step_handler(mess, handl_button)
-    elif msg.text == "4":
-        lg.actions('Экспорт данных')
+    elif msg.text == "3":
+        lg.actions('Импорт данных')
         bot.send_message(msg.chat.id, 'Загрузите файл')
     else:
         start(msg)
